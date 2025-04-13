@@ -15,43 +15,57 @@ class PriceCalculator
         $total = 0.0;
 
         foreach ($order->getItems() as $item) {
-            $packs = $supplier->getProductPacksByName($item->getProductName());
+            $productName = $item->getProductName();
+            $requiredUnits = $item->getQuantity();
+            $packs = $supplier->getProductPacksByName($productName);
 
             if (empty($packs)) {
                 throw new \RuntimeException("Supplier '{$supplier->getName()}' does not offer {$item->getProductName()}");
             }
 
-            // Sort by price per unit ascending
-            usort($packs, fn(ProductPack $a, ProductPack $b) =>
-                ($a->getPrice() / $a->getUnitCount()) <=> ($b->getPrice() / $b->getUnitCount())
-            );
+            // Sort: bigger packs first, then cheaper per unit
+            usort($packs, function (ProductPack $a, ProductPack $b) {
+                if ($a->getUnitCount() === $b->getUnitCount()) {
+                    return ($a->getPrice() / $a->getUnitCount()) <=> ($b->getPrice() / $b->getUnitCount());
+                }
+                return $b->getUnitCount() <=> $a->getUnitCount(); // Desc by size
+            });
 
-            $remaining = $item->getQuantity();
-            $itemTotal = 0.0;
+            $remaining = $requiredUnits;
+            $cost = 0.0;
 
             foreach ($packs as $pack) {
-                if ($remaining <= 0) break;
-
-                $unitsPerPack = $pack->getUnitCount();
-                $needed = intdiv($remaining, $unitsPerPack);
-                if ($remaining % $unitsPerPack !== 0) {
-                    $needed++; // Get one more pack to cover leftovers
+                if ($remaining <= 0) {
+                    break;
                 }
 
-                $packsToUse = min($needed, ceil($remaining / $unitsPerPack));
-                $actualUnits = $packsToUse * $unitsPerPack;
+                $unitsPerPack = $pack->getUnitCount();
+                $numPacks = intdiv($remaining, $unitsPerPack);
 
-                $itemTotal += $packsToUse * $pack->getPrice();
-                $remaining -= $packsToUse * $unitsPerPack;
+                if ($numPacks > 0) {
+                    $cost += $numPacks * $pack->getPrice();
+                    $remaining -= $numPacks * $unitsPerPack;
+                }
+            }
+
+            // Try to cover remainder using smallest pack
+            if ($remaining > 0) {
+                foreach ($packs as $pack) {
+                    if ($pack->getUnitCount() >= $remaining) {
+                        $cost += $pack->getPrice();
+                        $remaining -= $pack->getUnitCount();
+                        break;
+                    }
+                }
             }
 
             if ($remaining > 0) {
-                throw new \RuntimeException("Supplier '{$supplier->getName()}' cannot fulfill {$item->getQuantity()} units of {$item->getProductName()}");
+                throw new \RuntimeException("Supplier '{$supplier->getName()}' cannot fulfill {$requiredUnits} units of {$productName}");
             }
 
-            $total += $itemTotal;
+            $total += $cost;
         }
 
-        return $total;
+        return round($total, 2);
     }
 }
