@@ -1,9 +1,6 @@
 {
     "name": "shiva/wawibox",
     "description": "Wawibox price comparison",
-    "require": {
-        "phpunit/phpunit": "^12.1"
-    },
     "require-dev": {
         "phpunit/phpunit": "^12.1"
     },
