@@ -36,6 +36,10 @@ class SupplierComparisonService
             }
         }
 
+        if (!$bestSupplier) {
+            throw new \RuntimeException("No supplier can fulfill the order");
+        }
+
         return [
             'supplier' => $bestSupplier,
             'price' => $lowestPrice
