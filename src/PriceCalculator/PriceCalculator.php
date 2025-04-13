@@ -17,6 +17,10 @@ class PriceCalculator
         foreach ($order->getItems() as $item) {
             $packs = $supplier->getProductPacksByName($item->getProductName());
 
+            if (empty($packs)) {
+                throw new \RuntimeException("Supplier '{$supplier->getName()}' does not offer {$item->getProductName()}");
+            }
+
             // Sort by price per unit ascending
             usort($packs, fn(ProductPack $a, ProductPack $b) =>
                 ($a->getPrice() / $a->getUnitCount()) <=> ($b->getPrice() / $b->getUnitCount())
@@ -39,6 +43,10 @@ class PriceCalculator
 
                 $itemTotal += $packsToUse * $pack->getPrice();
                 $remaining -= $packsToUse * $unitsPerPack;
+            }
+
+            if ($remaining > 0) {
+                throw new \RuntimeException("Supplier '{$supplier->getName()}' cannot fulfill {$item->getQuantity()} units of {$item->getProductName()}");
             }
 
             $total += $itemTotal;
