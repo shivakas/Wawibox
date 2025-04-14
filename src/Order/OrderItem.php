@@ -6,6 +6,15 @@ namespace Wawibox\Order;
 
 class OrderItem
 {
+    public  const DENTAL_FLOSS = 'Dental Floss';
+    public  const IBUROFEN = 'Ibuprofen';
+
+    public static array $orderItems = 
+    [
+        self::DENTAL_FLOSS,
+        self::IBUROFEN
+    ];
+
     public function __construct(
         private string $productName,
         private int $quantity
