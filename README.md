@@ -34,7 +34,7 @@ This PHP CLI application calculates the best total price for a customer's dental
 #### Requirements
     PHP 8.0+ & Composer
 
-#### Build
+#### Build the application
     composer install
 
 #### Run the application
