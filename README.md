@@ -24,7 +24,7 @@ This PHP CLI application calculates the best total price for a customer's dental
 ### Run the application
     docker-compose run --rm --remove-orphans app "Dental Floss:5,Ibuprofen:5"
 
-## Run unit tests
+### Run unit tests
     docker-compose run --rm --remove-orphans test
 
 ## Run with Composer
@@ -37,6 +37,6 @@ This PHP CLI application calculates the best total price for a customer's dental
 ### Run the application
     php index.php "Dental Floss:5,Ibuprofen:12"
 
-## Run unit tests
+### Run unit tests
     vendor/bin/phpunit tests
 
