@@ -14,6 +14,9 @@ This PHP CLI application calculates the best total price for a customer's dental
 - Fully Dockerized (no local PHP needed)
 - Unit tested with PHPUnit
 
+## Clone the application locally
+    git clone "https://github.com/shivakas/Wawibox.git"
+
 ## Run with Docker
 ### Requirements
     Docker & Docker Compose
