@@ -1,9 +1,11 @@
+version: '3.8'
+
 services:
   app:
     build: .
-    container_name: wawibox-app
     volumes:
       - .:/app
+      - vendor-data:/app/vendor
     working_dir: /app
     entrypoint: ["php", "index.php"]
     stdin_open: true
@@ -11,9 +13,12 @@ services:
 
   test:
     build: .
-    container_name: wawibox-test
     volumes:
       - .:/app
+      - vendor-data:/app/vendor
     working_dir: /app
     entrypoint: ["vendor/bin/phpunit"]
     command: ["tests"]
+
+volumes:
+  vendor-data:
