@@ -11,12 +11,15 @@ class ValidateOrder
     public function validateOrderItems(): array	
     {
         global $argv;
+        global $argc;
+        
+
+        if ($argc < 2) {
+            throw new \InvalidArgumentException('Usage: Please enter valid arguments in format "Product1:Quantity1,Product2:Quantity2"');
+        }
+
         $input = $argv[1];
         $orderItems = [];
-
-        if ($argv < 2) {
-            throw new \InvalidArgumentException('Usage: Please enter valid arguments in format "Product1:Quantity1,Product2:Quantity2\"\n');
-        }
 
         foreach (explode(',', $input) as $item) {
             $parts = explode(':', $item);
@@ -29,11 +32,19 @@ class ValidateOrder
             $quantity = (int) trim($parts[1]);
 
             if (in_array($productName,OrderItem::$orderItems) === false) {
-                throw new \InvalidArgumentException("Invalid product : '$productName'");
+                //throw new \InvalidArgumentException("Invalid product: '$productName'". "Available products:'OrderItem::$orderItems'");
+                throw new \InvalidArgumentException(
+                    sprintf(
+                    "Invalid product: %s. Available products: %s.",
+                     $productName, implode(",", OrderItem::$orderItems)
+                    )
+                );    
             }
         
             if ($quantity <= 0) {
-                throw new \InvalidArgumentException(message:"Invalid quantity for product '$productName'");
+                throw new \InvalidArgumentException(
+                    sprintf("invalid quantity for product %s", $productName)
+                );
             }
 
             $orderItems[] = new OrderItem($productName, $quantity);
