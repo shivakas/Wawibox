@@ -18,28 +18,28 @@ This PHP CLI application calculates the best total price for a customer's dental
     git clone "https://github.com/shivakas/Wawibox.git"
 
 ## Run with Docker
-### Requirements
+#### Requirements
     Docker & Docker Compose
 
-### Build the container
+#### Build the container
     docker-compose build
 
-### Run the application
+#### Run the application
     docker-compose run --rm --remove-orphans app "Dental Floss:5,Ibuprofen:5"
 
-### Run unit tests
+#### Run unit tests
     docker-compose run --rm --remove-orphans test
 
 ## Run with Composer
-### Requirements
+#### Requirements
     PHP 8.0+ & Composer
 
-### Build
+#### Build
     composer install
 
-### Run the application
+#### Run the application
     php index.php "Dental Floss:5,Ibuprofen:12"
 
-### Run unit tests
+#### Run unit tests
     vendor/bin/phpunit tests
 
