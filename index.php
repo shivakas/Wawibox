@@ -18,7 +18,6 @@ if ($argc < 2) {
 $input = $argv[1];
 $orderItems = [];
 
-
 foreach (explode(',', $input) as $item) {
     $parts = explode(':', $item);
     if (count($parts) !== 2) {
