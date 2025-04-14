@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Wawibox\Product;
 
+/**
+ * Representing a pack of a product offered by a supplier.
+ */
 class ProductPack
 {
     public function __construct(

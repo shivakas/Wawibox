@@ -4,6 +4,9 @@ declare(strict_types= 1);
 
 namespace Wawibox\Order;
 
+/**
+ * Each OrderItem represents one product 
+ */
 class OrderItem
 {
     public  const DENTAL_FLOSS = 'Dental Floss';

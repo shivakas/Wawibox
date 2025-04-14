@@ -8,6 +8,12 @@ use Wawibox\Order\Order;
 use Wawibox\Supplier\Supplier;
 use Wawibox\Product\ProductPack;
 
+/**
+ * Takes an order and a supplier
+ * Finds the cheapest combination of packs to fulfill each product in the order.
+ * Returns the total cost for the supplier.
+ * Throws an exception if the supplier can’t fulfill the order.
+ */
 class PriceCalculator
 {
     public function calculateTotalPrice(Order $order, Supplier $supplier): float

@@ -8,6 +8,11 @@ use Wawibox\Order\Order;
 use Wawibox\Supplier\Supplier;
 use Wawibox\PriceCalculator\PriceCalculator;
 
+/**
+ * Accepts a list of suppliers and an order.
+ * Uses the PriceCalculator to compute total prices.
+ * Returns the cheapest supplier and price.
+ */
 class SupplierComparisonService
 {
     /**

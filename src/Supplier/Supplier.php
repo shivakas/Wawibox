@@ -6,6 +6,9 @@ namespace Wawibox\Supplier;
 
 use Wawibox\Product\ProductPack;
 
+/**
+ * Supplier class that holds the name and the list of ProductPacks it offers.
+ */
 class Supplier
 {
     /**
