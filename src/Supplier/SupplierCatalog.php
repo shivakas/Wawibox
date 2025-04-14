@@ -8,10 +8,12 @@ use Wawibox\Order\OrderItem;
 use Wawibox\Product\ProductPack;
 use Wawibox\Supplier\Supplier;
 
+/**
+ * Supplier repository
+ */
 class SupplierCatalog
 {
    /**
-    * Summary of getSupplierCatalog
     * @return Supplier[]
     */
    public static function getSupplierCatalog(): array
