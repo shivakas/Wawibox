@@ -12,7 +12,6 @@ class ValidateOrder
     {
         global $argv;
         global $argc;
-        
 
         if ($argc < 2) {
             throw new \InvalidArgumentException('Usage: Please enter valid arguments in format "Product1:Quantity1,Product2:Quantity2"');
@@ -43,7 +42,7 @@ class ValidateOrder
         
             if ($quantity <= 0) {
                 throw new \InvalidArgumentException(
-                    sprintf("invalid quantity for product %s", $productName)
+                    sprintf("Invalid quantity for product %s.", $productName)
                 );
             }
 
