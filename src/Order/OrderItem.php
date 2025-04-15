@@ -9,8 +9,8 @@ namespace Wawibox\Order;
  */
 class OrderItem
 {
-    public  const DENTAL_FLOSS = 'Dental Floss';
-    public  const IBUROFEN = 'Ibuprofen';
+    public const DENTAL_FLOSS = 'Dental Floss';
+    public const IBUROFEN = 'Ibuprofen';
 
     public static array $orderItems = 
     [
