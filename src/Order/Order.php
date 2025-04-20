@@ -14,7 +14,8 @@ class Order
      */
     public function __construct(
         private array $items
-    ) {}
+    ) {
+    }
 
     /**
      * @return OrderItem[]

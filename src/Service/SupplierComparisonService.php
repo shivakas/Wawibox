@@ -21,7 +21,8 @@ class SupplierComparisonService
     public function __construct(
         private array $suppliers,
         private PriceCalculator $calculator
-    ) {}
+    ) {
+    }
 
     public function findBestSupplier(Order $order): array
     {

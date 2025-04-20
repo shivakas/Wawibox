@@ -13,7 +13,8 @@ class ProductPack
         private string $productName,
         private int $unitCount,
         private float $price
-    ) {}
+    ) {
+    }
 
     public function getProductName(): string
     {

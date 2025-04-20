@@ -17,7 +17,8 @@ class Supplier
     public function __construct(
         private string $name,
         private array $productPacks
-    ) {}
+    ) {
+    }
 
     public function getName(): string
     {

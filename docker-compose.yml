@@ -18,5 +18,19 @@ services:
     entrypoint: ["vendor/bin/phpunit"]
     command: ["tests"]
 
+  phpcs:
+    image: jakzal/phpqa
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: phpcs --standard=PSR12 src
+
+  phpcbf:
+    image: jakzal/phpqa
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: phpcbf --standard=PSR12 src 
+
 volumes:
   vendor-data:
